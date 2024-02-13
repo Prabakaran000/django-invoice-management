@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="col-md-6 offset-md-3">
+  {% if not user.is_authenticated %}
+    <h1>Login</h1>
+    <form method="POST" action="{% url 'record' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+      <div class="mb-3">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    
+    {% if form.errors %}
+      <div class="alert alert-danger" role="alert">
+        Invalid username or password.
+      </div>
+    {% endif %}
+  {% else %}
+    <h1>Records</h1>
+    <!-- Display records here -->
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th scope="col">S_No</th>
+          <th scope="col">consignment_No</th>
+          <th scope="col">date</th>
+          <th scope="col">weight</th>
+          <th scope="col">destination</th>
+          <th scope="col">price</th>
+        </tr>
+      </thead>
+      <tbody>
+
+
+       
+
+    
+      {% for record in records %}
+        <tr>
+          <td><a href="{% url 'seprate' record.S_No %}">{{ record.S_No }}</a></td>
+          <td>{{ record.consignment_No }}</td>
+          <td>{{ record.date }}</td>
+          <td>{{ record.weight }}</td>
+          <td>{{ record.destination }}</td>
+          <td>{{ record.price }}</td>
+        </tr>
+      
+      
+        </tr>
+      </tbody>
+    </table>
+    {% endfor %}
+    <a href="{% url 'add_record' %}" class="btn btn-primary">ADD</a>
+    {% endif %}
+
+  
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Seprate Record</h1>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Invoice</h1>
+            <address>
+                <strong>Customer:</strong><br>
+                Name:<br>
+                Address:<br>
+                Contact:<br>
+                
+            </address>
+        </div>
+        <div class="col text-right">
+            <p><strong>Invoice #: </strong> {{ seprate.S_No }}</p>
+            <p><strong>Date: </strong> {{ seprate.date }}</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col">
+            <h3>Consignment Details</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Consignment No</th>
+                        <th>Date</th>
+                        <th>Weight</th>
+                        <th>Destination</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ seprate.consignment_No }}</td>
+                        <td>{{ seprate.date }}</td>
+                        <td>{{ seprate.weight }}</td>
+                        <td>{{ seprate.destination }}</td>
+                        <td>{{ seprate.price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col">
+            <h3>Payment Details</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Payment Method</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>{{ seprate.price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<a href="{% url 'record' %}" class="btn btn-secondary">Back</a>
+<a href="{% url 'delete_record' seprate.S_No %}" class="btn btn-danger">Delete</a>
+<a href="{% url 'update_record' seprate.S_No %}" class="btn btn-primary">Update Record</a>
+
+
+
+{% endblock %}
